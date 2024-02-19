@@ -5,7 +5,6 @@ export async function onRequestPost(context) {
 
     let input = await context.request.formData();
     const countryCode = context.request.headers.get('CF-IPCountry');
-    const res = JSON.stringify({ countryCode }); 
     console.log(res);
 
     let output = {};
@@ -18,6 +17,7 @@ export async function onRequestPost(context) {
       }
     }
     console.log(output);
+    output.countryCode = countryCode;
 
     let data = JSON.stringify(output, null, 2);
 
@@ -38,7 +38,7 @@ export async function onRequestPost(context) {
     return new Response(data, {
       status: 302,
       headers: {
-        'Location': `./thanks.html?name=${output.name}&tel=${getTelephone}&res=${res}`,
+        'Location': `./thanks.html?name=${output.name}&tel=${getTelephone}`,
         'Content-Type': 'application/json;charset=utf-8',
       },
     });
