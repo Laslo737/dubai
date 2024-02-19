@@ -4,8 +4,8 @@ export async function onRequestPost(context) {
     const telegramChatId = context.env.TELEGRAM_CHAT_ID;
 
     let input = await context.request.formData();
-    // const countryCode = context.request.headers.get('CF-IPCountry');
-    // output['country'] = countryCode; 
+    const countryCode = context.request.headers
+    output['country'] = countryCode; 
 
     let output = {};
     for (let [key, value] of input) {
