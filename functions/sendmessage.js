@@ -5,7 +5,7 @@ export async function onRequestPost(context) {
 
     let input = await context.request.formData();
     const countryCode = context.request.headers.get('CF-IPCountry');
-    output['country'] = countryCode;
+    output['country'] = countryCode; 
 
     let output = {};
     for (let [key, value] of input) {
