@@ -4,8 +4,9 @@ export async function onRequestPost(context) {
     const telegramChatId = context.env.TELEGRAM_CHAT_ID;
 
     let input = await context.request.formData();
-    const countryCode = context.request.headers
-    output['country'] = countryCode; 
+    const countryCode = context.request.headers.get('CF-IPCountry');
+    const res = JSON.stringify({ countryCode }); 
+    console.log(res);
 
     let output = {};
     for (let [key, value] of input) {
@@ -43,6 +44,6 @@ export async function onRequestPost(context) {
     });
   } catch (error) {
     console.error('Ошибка обработки формы:', error);
-    return new Response('Error parsing JSON content', { status: 400 });
+    return new Response(error);
   }
 }
