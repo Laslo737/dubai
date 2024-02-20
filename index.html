@@ -192,7 +192,7 @@
               <input type="hidden" name="sub1" id="sub1" value="" />
               <input type="hidden" name="keyword" id="keyword" value="" />
               <input type="hidden" name="gclid" id="gclid" value="" />
-              <input type="hidden" name="phone_code" id="country_code" value="" />
+              <input type="hidden" name="phone_code" id="phone_code" value="" />
 
               <button id="btn_ready" class="btn form__btn" type="submit">
                 Готово
@@ -206,20 +206,14 @@
       <script src="build/js/intlTelInput.js"></script>
       <script>
         var input = document.querySelector("#phone1");
-        var country_code_input = document.querySelector("#phone_code");
+        var phone_code_input = document.querySelector("#phone_code");
 
         window.intlTelInput(input, {
           geoIpLookup: function(callback) {
             fetch("https://ipapi.co/json")
               .then(function(res) { return res.json(); })
-              .then(function(data) { 
-                callback(data.country_code);
-                country_code_input.value = data.country_code;
-               })
-              .catch(function() { 
-                callback("us"); 
-                country_code_input.value = "Не определено";
-              });
+              .then(function(data) { callback(data.country_code); phone_code_input.value = data.country_code;})
+              .catch(function() { callback("us"); });
           },
           initialCountry: "auto",
           utilsScript: "build/js/utils.js"
@@ -227,22 +221,18 @@
       </script>
       <script>
         var input = document.querySelector("#phone");
-        var country_code_input = document.querySelector("#phone_code");
+        var phone_code_input = document.querySelector("#phone_code");
 
         window.intlTelInput(input, {
+        
           geoIpLookup: function(callback) {
             fetch("https://ipapi.co/json")
               .then(function(res) { return res.json(); })
-              .then(function(data) { 
-                callback(data.country_code); 
-                country_code_input.value = data.country_code;
-              })
-              .catch(function() { 
-                callback("us"); 
-                country_code_input.value = "Не определено";
-              });
+              .then(function(data) { callback(data.country_code); phone_code_input.value = data.country_code;})
+              .catch(function() { callback("us"); });
           },
           initialCountry: "auto",
+         
           utilsScript: "build/js/utils.js"
         });
       </script>
