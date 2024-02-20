@@ -25,6 +25,11 @@ $(document).ready(function () {
    });
 
    $(soc2).click(function () {
+      $('#formDisplay').css({
+         'display': 'block',
+      });
+      $('#phone_phone').css({'display': 'none'})
+      $('#whatsapp_phone').css({'display': 'block'})
       $(this).addClass('social__item-active');
       $('#item__tel').removeClass('social__item-active');
       $('#input__whatsapp, .form__btn, #input__name').css({
@@ -40,6 +45,11 @@ $(document).ready(function () {
       $('#input__telefon').removeAttr('required')
    });
    $(soc3).click(function () {
+      $('#whatsapp_phone').css({'display': 'none'})
+      $('#phone_phone').css({'display': 'block'})
+      $('#formDisplay').css({
+         'display': 'block',
+      });
       $(this).addClass('social__item-active');
       $('#item__whatsapp').removeClass('social__item-active');
       $('#input__telefon, .form__btn, #input__name').css({

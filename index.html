@@ -6,9 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Недвижимость в Дубае</title>
+  <link rel="stylesheet" href="build/css/intlTelInput.css" />
+  <link rel="stylesheet" href="build/css/demo.css" />
   <link rel="stylesheet" href="css/main.css" />
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+
+
+
 
 </head>
 
@@ -177,22 +183,69 @@
                 <span>Телефон</span>
               </div>
             </div>
-            <label for="" class="last__label">
-              <input type="text" id="input__name" name="name" placeholder="Ваше имя*" required />
-              <input type="tel" id="input__whatsapp" name="whatsapp" placeholder="Номер WhatsApp*" />
-              <input type="tel" id="input__telefon" name="phone" placeholder="Номер телефона*" />
+            <div id="formDisplay" style="margin-top: 20px; display: none;">
+              <input placeholder="Введите Ваше имя" name="fio" id="fio" type="text">
+              <div id="whatsapp_phone" style="margin-top: 15px;"><input id="phone" name="whatsapp" type="tel" value="" /></div>
+              
+              <div id="phone_phone" style="margin-top: 15px;"><input id="phone1" name="phone" type="tel" value="" /></div>
+
               <input type="hidden" name="sub1" id="sub1" value="" />
               <input type="hidden" name="keyword" id="keyword" value="" />
               <input type="hidden" name="gclid" id="gclid" value="" />
-            </label>
-            <button id="btn_ready" class="btn form__btn" type="submit">
-              Готово
-            </button>
+              <input type="hidden" name="phone_code" id="country_code" value="" />
+
+              <button id="btn_ready" class="btn form__btn" type="submit">
+                Готово
+              </button>
+            </div>
+
           </div>
         </div>
       </form>
 
+      <script src="build/js/intlTelInput.js"></script>
+      <script>
+        var input = document.querySelector("#phone1");
+        var country_code_input = document.querySelector("#phone_code");
 
+        window.intlTelInput(input, {
+          geoIpLookup: function(callback) {
+            fetch("https://ipapi.co/json")
+              .then(function(res) { return res.json(); })
+              .then(function(data) { 
+                callback(data.country_code);
+                country_code_input.value = data.country_code;
+               })
+              .catch(function() { 
+                callback("us"); 
+                country_code_input.value = "Не определено";
+              });
+          },
+          initialCountry: "auto",
+          utilsScript: "build/js/utils.js"
+        });
+      </script>
+      <script>
+        var input = document.querySelector("#phone");
+        var country_code_input = document.querySelector("#phone_code");
+
+        window.intlTelInput(input, {
+          geoIpLookup: function(callback) {
+            fetch("https://ipapi.co/json")
+              .then(function(res) { return res.json(); })
+              .then(function(data) { 
+                callback(data.country_code); 
+                country_code_input.value = data.country_code;
+              })
+              .catch(function() { 
+                callback("us"); 
+                country_code_input.value = "Не определено";
+              });
+          },
+          initialCountry: "auto",
+          utilsScript: "build/js/utils.js"
+        });
+      </script>
 
       <div class="form__manager">
         <div class="manager">
