@@ -9,8 +9,7 @@ body {
   color: #555;
 }
 
-input,
-button {
+input {
   height: 35px;
   margin: 0;
   padding: 6px 12px;
@@ -34,17 +33,6 @@ input::placeholder {
   color: #bbb;
 }
 
-button {
-  color: #fff;
-  background-color: #428bca;
-  border: 1px solid #357ebd;
-  margin-left: 5px;
-}
-button:hover {
-  background-color: #3276b1;
-  border-color: #285e8e;
-  cursor: pointer;
-}
 
 .notice {
   margin-top: 15px;

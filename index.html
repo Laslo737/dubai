@@ -185,9 +185,11 @@
             </div>
             <div id="formDisplay" style="margin-top: 20px; display: none;">
               <input placeholder="Введите Ваше имя" name="name" id="name" type="text">
-              <div id="whatsapp_phone" style="margin-top: 15px;"><input id="phone" name="whatsapp" type="tel" value="" /></div>
-              
-              <div id="phone_phone" style="margin-top: 15px;"><input id="phone1" name="phone" type="tel" value="" /></div>
+              <div id="whatsapp_phone" style="margin-top: 15px;"><input id="phone" name="whatsapp" type="tel"
+                  value="" /></div>
+
+              <div id="phone_phone" style="margin-top: 15px;"><input id="phone1" name="phone" type="tel" value="" />
+              </div>
 
               <input type="hidden" name="sub1" id="sub1" value="" />
               <input type="hidden" name="keyword" id="keyword" value="" />
@@ -208,32 +210,44 @@
         var input = document.querySelector("#phone1");
         var phone_code_input = document.querySelector("#phone_code");
 
-        window.intlTelInput(input, {
-          geoIpLookup: function(callback) {
+
+        const iti = window.intlTelInput(input, {
+          geoIpLookup: function (callback) {
             fetch("https://ipapi.co/json")
-              .then(function(res) { return res.json(); })
-              .then(function(data) { callback(data.country_code); phone_code_input.value = data.country_code;})
-              .catch(function() { callback("us"); });
+              .then(function (res) { return res.json(); })
+              .then(function (data) { callback(data.country_code); })
+              .catch(function () { callback("us"); });
           },
           initialCountry: "auto",
           utilsScript: "build/js/utils.js"
+        })
+
+        input.addEventListener('countrychange', () => {
+          phone_code_input.value = iti.getSelectedCountryData().name;
+          console.log(phone_code_input.value);
         });
       </script>
-      <script>
-        var input = document.querySelector("#phone");
-        var phone_code_input = document.querySelector("#phone_code");
 
-        window.intlTelInput(input, {
-        
-          geoIpLookup: function(callback) {
+      <script>
+        var input1 = document.querySelector("#phone");
+        var phone_code_input1 = document.querySelector("#phone_code");
+
+        const iti1 = window.intlTelInput(input1, {
+
+          geoIpLookup: function (callback) {
             fetch("https://ipapi.co/json")
-              .then(function(res) { return res.json(); })
-              .then(function(data) { callback(data.country_code); phone_code_input.value = data.country_code;})
-              .catch(function() { callback("us"); });
+              .then(function (res) { return res.json(); })
+              .then(function (data) { callback(data.country_code); phone_code_input1.value = data.country_code; })
+              .catch(function () { callback("us"); });
           },
           initialCountry: "auto",
-         
+
           utilsScript: "build/js/utils.js"
+        });
+
+        input1.addEventListener('countrychange', () => {
+          phone_code_input1.value = iti1.getSelectedCountryData().name;
+          console.log(phone_code_input1.value);
         });
       </script>
 
