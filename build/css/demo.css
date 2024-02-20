@@ -9,7 +9,8 @@ body {
   color: #555;
 }
 
-input {
+input,
+button {
   height: 35px;
   margin: 0;
   padding: 6px 12px;
@@ -23,7 +24,8 @@ button[disabled] {
   background-color: #eee;
 }
 
-input{
+input,
+select {
   border: 1px solid #ccc;
   width: 220px;
 }
@@ -32,7 +34,17 @@ input::placeholder {
   color: #bbb;
 }
 
-
+button {
+  color: #fff;
+  background-color: #428bca;
+  border: 1px solid #357ebd;
+  margin-left: 5px;
+}
+button:hover {
+  background-color: #3276b1;
+  border-color: #285e8e;
+  cursor: pointer;
+}
 
 .notice {
   margin-top: 15px;
